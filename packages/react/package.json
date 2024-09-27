@@ -1,0 +1,79 @@
+{
+  "author": "planttheidea",
+  "browser": "dist/umd/index.js",
+  "bugs": {
+    "url": "https://github.com/planttheidea/diviso/issues"
+  },
+  "dependencies": {
+    "@types/use-sync-external-store": "^0.0.3",
+    "use-sync-external-store": "^1.2.0"
+  },
+  "description": "Official React bindings for diviso.",
+  "devDependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@react-spring/web": "^9.6.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/react-hooks": "^8.0.1",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-error-boundary": "^3.1.4"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/esm/types/index.d.ts",
+        "default": "./dist/esm/index.mjs"
+      },
+      "require": {
+        "types": "./dist/cjs/types/index.d.ts",
+        "default": "./dist/cjs/index.cjs"
+      },
+      "default": {
+        "types": "./dist/umd/types/index.d.ts",
+        "default": "./dist/umd/index.js"
+      }
+    }
+  },
+  "homepage": "https://github.com/planttheidea/diviso/react#readme",
+  "keywords": [
+    "state"
+  ],
+  "license": "MIT",
+  "main": "dist/cjs/index.cjs",
+  "module": "dist/esm/index.mjs",
+  "name": "@diviso/react",
+  "peerDependencies": {
+    "@diviso/core": "^1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/planttheidea/diviso.git"
+  },
+  "scripts": {
+    "build": "npm run build:esm && npm run build:cjs && npm run build:umd && npm run build:min",
+    "build:test": "NODE_ENV=production rollup -c build/rollup/config.base.js",
+    "build:cjs": "NODE_ENV=production rollup -c build/rollup/config.cjs.js && tsc -p ./build/tsconfig/cjs.json",
+    "build:esm": "NODE_ENV=production rollup -c build/rollup/config.esm.js && tsc -p ./build/tsconfig/esm.json",
+    "build:min": "NODE_ENV=production rollup -c build/rollup/config.min.js && tsc -p ./build/tsconfig/min.json",
+    "build:umd": "NODE_ENV=production rollup -c build/rollup/config.umd.js && tsc -p ./build/tsconfig/umd.json",
+    "clean": "rimraf dist",
+    "dev": "NODE_ENV=development webpack-dev-server --config=build/webpack.config.js",
+    "dist": "npm run clean && npm run build",
+    "lint": "NODE_ENV=test eslint src",
+    "lint:fix": "NODE_ENV=test eslint src --fix",
+    "release": "release-it",
+    "release:beta": "release-it --config=.release-it.beta.json",
+    "release:scripts": "npm run lint && npm run typecheck && npm run test && npm run dist",
+    "start": "npm run dev",
+    "test": "NODE_ENV=test NODE_PATH=. jest",
+    "test:coverage": "npm test -- --coverage",
+    "test:watch": "npm test -- --watch",
+    "typecheck": "tsc --noEmit --p build/tsconfig/base.json"
+  },
+  "type": "module",
+  "types": "./index.d.ts",
+  "version": "1.0.0"
+}
